@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <Main :albumsMovie="filteredAlbumsArray"/>
+    <Main :albumsMovie="moviesfiltered"/>
   </div>
 </template>
 
