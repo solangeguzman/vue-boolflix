@@ -1,8 +1,7 @@
 <template>
 
    <header>
-<input type="text" placeholder="Search" v-model="searchString" @keyup.enter="$emit('search', searchString)"/>
-   
+    <input type="text" placeholder="Search" v-model="searchString" @keyup.enter="$emit('search', searchString)"/>
    </header>
 
 </template>

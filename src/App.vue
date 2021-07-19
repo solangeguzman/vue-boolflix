@@ -2,7 +2,6 @@
   <div id="app">
     <Header />
     <Main :albumsMovie="filteredAlbumsArray"/>
-  <!-- andava nel Main @search="searchcardisk" -->
   </div>
 </template>
 
@@ -19,34 +18,28 @@ export default {
   data() {
     return {
       albumsMovie: [],
-      inputSearch:''
+      moviesFiltered: [],
 
     };
   },
   created() {
-    axios.get("https://api.themoviedb.org/3/search/movie?api_key=31eaab22661753a4564e4f0c10e72642&query=ritorno+al+futuro").then((response) => {
-      this.albumsMovie = response.data.response;
-      this.searchMovie('')
+    axios.get("https://api.themoviedb.org/3//movie/popular?api_key=31eaab22661753a4564e4f0c10e72642").then((results) => {
+      this.albumsMovie = results.data.results;
+      this.moviesFiltered=results.data.results;
     })
   },
-  computed:{
-    filteredAlbumsArray(){
-       return this.albumsMovie.filter((item) =>{
-       return item.title.includes(this.inputSearch);
+  methods:{
+    searchMovie(searchString){
+       if(searchString.lenght == 0){
+           this.moviesFiltered=this.albumsMovie
+           return;
+       } 
+       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=31eaab22661753a4564e4f0c10e72642&query=${searchString}`).then((results) =>{
+        this.moviesFiltered= results.data.results;
        })
+       
     }
   },
-  methods: {
-    
-    searchMovie(searchString){
-      this.inputSearch = searchString
-    },
-    searchMovie(searchString){
-     this.filteredAlbumsArray = this.albumsArray.filter((item) =>{
-      return item.title.includes(searchString);
-    })
-    }
-  }
 }
 </script>
 
