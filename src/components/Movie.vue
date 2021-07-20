@@ -1,70 +1,82 @@
 <template>
- <div>
-
-    <img  id="hover.img" :src="'https://image.tmdb.org/t/p/w200/'+ img"/>
-  
+  <div class="poster-container">  
+       <div class="section-poster">
+            <img class="poster" :src="'https://image.tmdb.org/t/p/w300/'+ img"/>
+               <!-- info film -->
+            <div class="film-info flex">
+                <div> {{title}}{{name}}</div>
+                <div>{{original_title}}</div>
+                <div class="voto">
+                   <i class="fas fa-star" v-for="star in star" :key="star"></i>
+                   <i class="far fa-star" v-for="(index) in (5-star)" :key="index"></i>
+                </div>
+                <span>lingua originale:<img class="flag" :src="flag(original_language)"></span>  
+            </div>
+                <!-- fine -->
+        </div>
+  </div>
+ 
    <!-- <div> {{poster_path}} </div> -->
-     <br>
-    <div class="info-films">
-      <h1> {{title}}-{{name}}</h1>
-      <!-- ----- -->
-      <div>
-          <span>{{ original_title }}</span>
-      </div>
-      <!-- ------- -->
-      <div>original language: {{original_language}} </div>
-      <div>
-          <img class="flag" :src="returnflag(original_language)" alt="flag">
-      </div>
-      
-      <!-- <span>{{ vote_average }}</span>  -->
-     
-      <div>
-       <span>
-         <ul v-if="vote > 0">
-          <li><i class="far fa-star"></i></li>
-          <li v-if="vote > 1"><i class="far fa-star"></i></li>
-          <li v-if="vote > 2"><i class="far fa-star"></i></li>
-          <li v-if="vote > 3"><i class="far fa-star"></i></li>
-          <li v-if="vote > 4"><i class="far fa-star"></i></li>
-         </ul>
-      </span>
-    </div>
- </div>
+    
 </template>
 
 <script>
 export default {
   name: 'Movie',
   props:{
-      // img: String,
+      img: String,
+      name:String,
       title: String,
       original_title: String,
-      orignal_language: String,
-      vote_average: String
+      original_language: String,
+      vote_average: Number,
   },
-  data() {
-    return {
-      vote: Math.round(this.vote_average / 2),
-    };
+  computed: {
+    star() {
+      return Math.floor(this.vote_average / 2);
+    },
   },
-  flag(original_language){
-    return require("../assets/" + original_language + ".png");
+  methods:{
+    flag(original_language){
+    return require("../assets/icon/" + original_language + ".png");
   }
+  }
+  
 };
 </script>
 
 <style lang="scss" scoped>
-.cont-movie{
-    
-  .info-films {
-    text-transform: capitalize;
-    position: absolute;
-    top: 30%;
-    left: 20px;
-    z-index: 1002;
-    color: white;
-    display: none;
+// ------
+.poster-container {
+  .section-poster {
+    background: rgb(170, 52, 52);
+    height: 417px;
+    margin: 8px;
+    border-radius: 15px;
+    .poster{
+      border-radius: 15px;
+      width: 100%;
+    }
+      &:hover .film-info {
+      display: block;
+    }
+    .film-info {
+      height: 200px;
+      font-size: 24px;
+      color: rgb(245, 243, 243);
+      position: relative;
+      bottom: 55%;
+      text-align: center;
+      background-color: rgb(27, 27, 27, 0.5);
+      justify-content: center;
+      display: none;
+    }
   }
+  .voto{
+    .fas{color: rgba(235, 216, 108, 0.603);}
+    .far{color: rgba(255, 255, 255, 0.664);}
+  }
+  // -----------
 }
+
 </style>

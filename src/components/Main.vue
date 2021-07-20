@@ -2,12 +2,14 @@
 <div class="cont-main">
   <div class="row">
     <Movie
-      class="col-2"  v-for="(item,index) in albumsMovie" 
+      class="col-3"  v-for="(item,index) in albumsMovie" 
       :key='index'
+      :img='item.poster_path'
+      :name='item.name'
       :title='item.title'
       :title_original='item.original_title'
-      :original="item.original_language"
-      :vote='item.vote_average'
+      :original_language="item.original_language"
+      :vote_average='item.vote_average'
     />
   </div>
 </div>

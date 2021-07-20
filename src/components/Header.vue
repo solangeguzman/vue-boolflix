@@ -14,10 +14,13 @@
             <span class="li-lista"><a style="color:white" href="#">La mia lista</a></span>
             <span>
               <span>
+                <!-- -----barra ricerca -->
                   <span class="ricerca">
-                    <input type="text" placeholder="Search" v-model="searchString" @keyup.enter="$emit('search', searchString)"/>
+                    <input id="input" type="text" placeholder="Search" v-model="searchString" @keyup.enter="$emit('search', searchString)"/>
                      <button @click="$emit('search', searchString)"><i class="fas fa-search"></i></button>
                   </span>
+                <!-- ---------- -->
+                  
                   <span id="margin" class="fin-list">Bambini</span>
                   <span class="fin-list"><a style="color:white" href="#"></a><i id="margin" class="fas fa-bell"></i></span>
                   <span class="fin-list"><i  id="margin" class="fas fa-sort-down"></i></span>
@@ -42,8 +45,6 @@ export default {
       searchString: '',
     }
   }
-  
-
 };
 </script>
 
@@ -62,7 +63,7 @@ nav{
        margin-left: 10px;
     }
   .ricerca{
-    margin-left: 330px;
+    margin-left: 300px;
     color: white;
   }
   .fin-list{
@@ -73,5 +74,14 @@ nav{
   #margin{
     margin-top: 20px;
   }
+  #input{
+    border-radius: 15px;
+    padding: 4px;
+   
+  }
+  button{
+    border-radius: 15px;
+  }
+
 }
 </style>

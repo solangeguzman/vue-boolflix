@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header @search="searchMovie" />
+    <Header @search="searchMovie" @click="button" />
     <Main :albumsMovie="albumsMovie"/>
   </div>
 </template>
@@ -9,6 +9,7 @@
 import axios from 'axios';
 import Header from './components/Header.vue';
 import Main from './components/Main.vue';
+
 export default {
   name: 'App',
   components: {
@@ -23,16 +24,25 @@ export default {
     };
   },
   created() {
-    axios.get("https://api.themoviedb.org/3/movie/popular?api_key=31eaab22661753a4564e4f0c10e72642&query=ritorno+al+futuro").then((results) => {
+    axios.get("https://api.themoviedb.org/3/movie/popular?api_key=31eaab22661753a4564e4f0c10e72642&").then((results) => {
       this.albumsMovie = results.data.results;
+      this.searchString="";
+      // console.log(this.albumsMovie)
     });
   },
   methods:{
     searchMovie(searchString){
-        axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=31eaab22661753a4564e4f0c10e72642&query=`+ searchString).then((results) =>{
-        this.albumsMovie=results.data.results;
-        // this.moviesFiltered= results.data.results;
+      if(searchString.length == 0){
+         axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=31eaab22661753a4564e4f0c10e72642&`).then((results) =>{
+         this.albumsMovie=results.data.results;
+         // this.moviesFiltered= results.data.results;
        });
+      }else{
+        axios.get(`https://api.themoviedb.org/3/search/multi/?api_key=31eaab22661753a4564e4f0c10e72642&query=${searchString}`).then((results)=>{
+          this.albumsMovie= results.data.results;
+        })
+      }
+       
     },
   },
 }
