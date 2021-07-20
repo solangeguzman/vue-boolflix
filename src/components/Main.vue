@@ -1,17 +1,17 @@
 <template>
- <div class="row cont-main">
-   <nav>
-  
-  </nav>
+<div class="cont-main">
+  <div class="row">
     <Movie
-      class="col-3"  v-for="Movie in albumsMovie" 
-      :key='Movie.id'
-      :title='Movie.title'
-      :original_title='Movie.original_title'
-      :original_language="Movie.original_language"
-      :vote_average='Movie.vote_average'
+      class="col-2"  v-for="(item,index) in albumsMovie" 
+      :key='index'
+      :title='item.title'
+      :title_original='item.original_title'
+      :original="item.original_language"
+      :vote='item.vote_average'
     />
- </div>
+  </div>
+</div>
+ 
 </template>
 
 <script>
@@ -24,14 +24,12 @@ export default {
   props: {
       albumsMovie: Array,
   },
-//   data () {
-//     return{
-//       searchString: ''
-//     }
-//   }
+
 };
 </script>
 
 <style lang="scss" scoped>
-
+.cont-main{
+  background-color: rgba(0, 0, 0, 0.842);
+}
 </style>
