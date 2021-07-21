@@ -4,20 +4,17 @@
             <img class="poster" :src="'https://image.tmdb.org/t/p/w300/'+ img"/>
                <!-- info film -->
             <div class="film-info flex">
-                <div> {{title}}{{name}}</div>
+                <div> {{title}}</div>
                 <div>{{original_title}}</div>
+                <span>lingua originale:<img class="flag" :src="flag(original_language)"></span>  
                 <div class="voto">
                    <i class="fas fa-star" v-for="star in star" :key="star"></i>
                    <i class="far fa-star" v-for="(index) in (5-star)" :key="index"></i>
                 </div>
-                <span>lingua originale:<img class="flag" :src="flag(original_language)"></span>  
             </div>
                 <!-- fine -->
         </div>
-  </div>
- 
-   <!-- <div> {{poster_path}} </div> -->
-    
+  </div>   
 </template>
 
 <script>
@@ -25,7 +22,6 @@ export default {
   name: 'Movie',
   props:{
       img: String,
-      name:String,
       title: String,
       original_title: String,
       original_language: String,
@@ -39,17 +35,17 @@ export default {
   methods:{
     flag(original_language){
     return require("../assets/icon/" + original_language + ".png");
-  }
+    }
   }
   
 };
 </script>
 
 <style lang="scss" scoped>
-// ------
+
 .poster-container {
   .section-poster {
-    background: rgb(170, 52, 52);
+    background: rgb(177, 169, 169);
     height: 417px;
     margin: 8px;
     border-radius: 15px;
@@ -76,7 +72,7 @@ export default {
     .fas{color: rgba(235, 216, 108, 0.603);}
     .far{color: rgba(255, 255, 255, 0.664);}
   }
-  // -----------
+
 }
 
 </style>

@@ -1,11 +1,11 @@
 <template>
-<div class="cont-main">
+<div class="container-full cont-main">
   <div class="row">
+    <h1>ORIGINALI NETFLIX</h1>
     <Movie
       class="col-3"  v-for="(item,index) in albumsMovie" 
       :key='index'
       :img='item.poster_path'
-      :name='item.name'
       :title='item.title'
       :title_original='item.original_title'
       :original_language="item.original_language"
@@ -32,6 +32,11 @@ export default {
 
 <style lang="scss" scoped>
 .cont-main{
-  background-color: rgba(0, 0, 0, 0.842);
+  background-color: rgba(0, 0, 0, 0.521);
+  h1{
+    color: white;
+    font-size: 24px;
+    margin: 10px;
+  }
 }
 </style>
